@@ -1,32 +1,37 @@
 # Devfolio — Mugilan V C
 
-A responsive, single-page developer portfolio built with semantic HTML, a custom CSS color/type system, Flexbox, and CSS Grid.
+A personal, responsive developer portfolio built with **semantic HTML and CSS**. The page uses a consistent two-font / three-colour system, a Flexbox header and navigation, a responsive CSS Grid for project cards, and mobile-first layout rules.
 
-## About
-
-This site introduces me, showcases three of my projects, and links to my contact channels. It's fully responsive: the projects grid goes from one column on mobile to three columns on desktop, and the nav stays usable on a phone.
-
-## Run locally
-
-No build step required — it's plain HTML/CSS.
-
-1. Clone the repo:
-   ```
-   git clone https://github.com/mugilstrange-ai/devfolio.git
-   cd devfolio
-   ```
-2. Open `index.html` directly in your browser, or serve it locally:
-   ```
-   python3 -m http.server 8000
-   ```
-   then visit `http://localhost:8000`.
-
-## Live URL
+## Live website
 
 https://mugilstrange-ai.github.io/devfolio/
 
-## Deploy (GitHub Pages)
+## Repository
 
-1. Push this repo to GitHub with `index.html` at the repo root.
-2. Go to **Settings → Pages → Source** and select **Deploy from a branch** → `main` → `/ (root)` → **Save**.
-3. Wait about a minute, then open the live URL above.
+https://github.com/mugilstrange-ai/devfolio
+
+## Run locally
+
+```bash
+git clone https://github.com/mugilstrange-ai/devfolio.git
+cd devfolio
+python3 -m http.server 8000
+```
+
+Open http://localhost:8000, or open `index.html` directly in a browser. No dependencies or bundler required.
+
+## Project structure
+
+- `index.html`: semantic header, nav, main, About and Projects sections, contact footer
+- `style.css`: brand/ink/paper variables, Flexbox, Grid, one/two-column responsive breakpoints, keyboard focus styling
+- `assets/favicon.svg`: portfolio favicon (added in feature PR)
+
+## Contact
+
+- Email: mailto:mugilstrange@gmail.com
+- GitHub: https://github.com/mugilstrange-ai
+- LinkedIn: link is labeled **LinkedIn search**, since no personal profile URL could be verified. It is intentionally not presented as a verified personal profile.
+
+## Deployment
+
+GitHub Pages serves `index.html` from repository `main`, at the URL above. The portfolio is static HTML/CSS; no build step is required.

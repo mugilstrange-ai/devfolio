@@ -1,0 +1,36 @@
+name: Portfolio Quality Check
+on:
+  push:
+    branches: [feature/responsive-devfolio]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify semantic HTML, responsive CSS and links
+        run: python3 scripts/verify_portfolio.py
+      - name: Start static server
+        run: |
+          nohup python3 -m http.server 8000 >/tmp/devfolio-server.log 2>&1 &
+          for i in $(seq 1 20); do
+            curl -fsS http://127.0.0.1:8000/index.html >/dev/null && break
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:8000/index.html | grep -q '<section id="projects"'
+      - name: Capture actual desktop and mobile browser screenshots
+        run: |
+          mkdir -p evidence
+          CHROME=$(command -v google-chrome || command -v chromium)
+          "$CHROME" --headless=new --no-sandbox --disable-dev-shm-usage --hide-scrollbars --window-size=1440,1200 --screenshot=evidence/desktop.png http://127.0.0.1:8000/
+          "$CHROME" --headless=new --no-sandbox --disable-dev-shm-usage --hide-scrollbars --window-size=390,980 --force-device-scale-factor=1 --screenshot=evidence/mobile.png http://127.0.0.1:8000/
+          test -s evidence/desktop.png && test -s evidence/mobile.png
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: portfolio-desktop-mobile-evidence
+          path: evidence/

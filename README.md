@@ -35,3 +35,7 @@ Open http://localhost:8000, or open `index.html` directly in a browser. No depen
 ## Deployment
 
 GitHub Pages serves `index.html` from repository `main`, at the URL above. The portfolio is static HTML/CSS; no build step is required.
+
+## Verification
+
+The `Portfolio Quality Check` workflow validates required semantic tags, CSS layout rules, the public project/contact links, and captures desktop/mobile screenshots from the built static site. The original repository remains public, and the open PR targets its own `main` branch.
